@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Map, {Marker} from 'react-map-gl'
 import {FaMapMarkerAlt} from 'react-icons/fa'
-import * as turf from '@turf/turf'
+import { point, distance } from '@turf/turf'
 import './Style.css'
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoicGhhbmlkYXR0YXJlZGR5IiwiYSI6ImNrZjd1MW4zczA1djIycm11bG5wazJ5ZGQifQ.Z1jmXgscOPSOajhWvyC-TA"
@@ -14,14 +14,14 @@ function OpenMap() {
     const options = {units: 'meters'}
 
     if(markerCoordinates.length === 1) {
-      let from = turf.point(Object.values(markerCoordinates[0]))
-      let to = turf.point(Object.values(coordinates))
-      let distanceResult = turf.distance(from, to, options).toFixed([2])
+      let from = point(Object.values(markerCoordinates[0]))
+      let to = point(Object.values(coordinates))
+      let distanceResult = distance(from, to, options).toFixed([2])
       coordinates.distance = distanceResult
     } else if(markerCoordinates.length !== 0) {
-      let from = turf.point(Object.values(markerCoordinates[markerCoordinates.length - 2]).slice(0, 2))
-      let to = turf.point(Object.values(coordinates))
-      let distanceResult = turf.distance(from, to, options).toFixed([2])
+      let from = point(Object.values(markerCoordinates[markerCoordinates.length - 2]).slice(0, 2))
+      let to = point(Object.values(coordinates))
+      let distanceResult = distance(from, to, options).toFixed([2])
       coordinates.distance = distanceResult
     }
 
@@ -47,7 +47,7 @@ function OpenMap() {
       {markerCoordinates.length !== 0 && markerCoordinates.map((marker, index) =>
         <Marker longitude={marker.lng} latitude={marker.lat} anchor="bottom" key={marker.lng + marker.lat + index}>
           <div className='marker'>
-            <h2>{index + 1}</h2>
+            <h4>{index + 1}</h4>
           </div>
         </Marker>
       )}

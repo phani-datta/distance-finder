@@ -40,3 +40,8 @@
     align-items: center;
     border-radius: 50%;
 }
+
+.marker h4{
+    color: white;
+    font-weight: 800;
+}
