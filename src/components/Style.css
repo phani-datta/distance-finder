@@ -1,0 +1,42 @@
+.mapMarkers{
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.pin{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.line{
+    width: 150px;
+    height: 3px;
+    background-color: red;
+    border-radius: 100px;
+}
+
+.pinName{
+    float: right;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 3px;
+    font-weight: 700;
+}
+
+.distance{
+    display: block;
+    text-align: center;
+}
+
+.marker{
+    background-color: #00b4d0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
