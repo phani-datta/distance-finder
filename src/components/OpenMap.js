@@ -1,7 +1,6 @@
 import React from 'react'
 import Map, {Marker} from 'react-map-gl'
 import {FaMapMarkerAlt} from 'react-icons/fa'
-import { point, distance } from '@turf/turf'
 import './Style.css'
 import addMarkerAction from '../store/_actions/mapAction'
 import { useDispatch, useSelector } from 'react-redux'
