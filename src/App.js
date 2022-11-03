@@ -1,12 +1,14 @@
 import React from "react";
-import OpenMap from "./components/OpenMap"
+import OpenMap from "./components/OpenMap";
+import store from "./store/store";
+import { Provider } from 'react-redux'
 
 function App() {
 
   return(
-    <React.Fragment>
+    <Provider store={store}>
       <OpenMap />
-    </React.Fragment>
+    </Provider>
   )
 }
 

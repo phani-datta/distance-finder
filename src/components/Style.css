@@ -41,6 +41,18 @@
     border-radius: 50%;
 }
 
+.mapboxgl-marker .marker{
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 0;
+    transform: rotate(45deg);
+}
+
+.mapboxgl-marker h4{
+    transform: rotate(-45deg);
+}
+
 .marker h4{
     color: white;
     font-weight: 800;

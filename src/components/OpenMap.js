@@ -1,31 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Map, {Marker} from 'react-map-gl'
 import {FaMapMarkerAlt} from 'react-icons/fa'
 import { point, distance } from '@turf/turf'
 import './Style.css'
+import addMarkerAction from '../store/_actions/mapAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoicGhhbmlkYXR0YXJlZGR5IiwiYSI6ImNrZjd1MW4zczA1djIycm11bG5wazJ5ZGQifQ.Z1jmXgscOPSOajhWvyC-TA"
 
 function OpenMap() {
-  const [markerCoordinates, setMarkerCoordinates] = useState([])
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state)
 
   const addMarker = (event) => {
     let coordinates = event.lngLat
-    const options = {units: 'meters'}
-
-    if(markerCoordinates.length === 1) {
-      let from = point(Object.values(markerCoordinates[0]))
-      let to = point(Object.values(coordinates))
-      let distanceResult = distance(from, to, options).toFixed([2])
-      coordinates.distance = distanceResult
-    } else if(markerCoordinates.length !== 0) {
-      let from = point(Object.values(markerCoordinates[markerCoordinates.length - 2]).slice(0, 2))
-      let to = point(Object.values(coordinates))
-      let distanceResult = distance(from, to, options).toFixed([2])
-      coordinates.distance = distanceResult
-    }
-
-    setMarkerCoordinates([...markerCoordinates, coordinates])
+    dispatch(addMarkerAction(coordinates))
   }
 
   return (
@@ -44,7 +33,7 @@ function OpenMap() {
       mapboxAccessToken= {MAPBOX_TOKEN}
       onClick={addMarker}
     >
-      {markerCoordinates.length !== 0 && markerCoordinates.map((marker, index) =>
+      {state.markerCoordinates.length !== 0 && state.markerCoordinates.map((marker, index) =>
         <Marker longitude={marker.lng} latitude={marker.lat} anchor="bottom" key={marker.lng + marker.lat + index}>
           <div className='marker'>
             <h4>{index + 1}</h4>
@@ -54,7 +43,7 @@ function OpenMap() {
       </Map>
       
       <div className='mapMarkers'>
-        {markerCoordinates.length !== 0 && markerCoordinates.map((coords, index) => 
+        {state.markerCoordinates.length !== 0 && state.markerCoordinates.map((coords, index) => 
           <div key={index}>
             <div className='pin'>
               {index !== 0 &&
@@ -63,9 +52,11 @@ function OpenMap() {
                   <div className='line'></div>
                 </div>
               }
-              <FaMapMarkerAlt size={50} color="#00b4d0" />
+              <FaMapMarkerAlt size={50} color="#00b4d0" title='Hello Bayya' />
             </div>
-            <p className='pinName'><small>Point {index+1}</small></p>
+            <div className='marker' style={{float: 'right', backgroundColor: "#ff2e19", marginRight: '10px'}}>
+              <h4>{index + 1}</h4>
+            </div>
           </div>
         )}
       </div>
