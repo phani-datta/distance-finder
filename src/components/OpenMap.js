@@ -51,7 +51,7 @@ function OpenMap() {
                   <div className='line'></div>
                 </div>
               }
-              <FaMapMarkerAlt size={50} color="#00b4d0" title='Hello Bayya' />
+              <FaMapMarkerAlt size={50} color="#00b4d0" />
             </div>
             <div className='marker' style={{float: 'right', backgroundColor: "#ff2e19", marginRight: '10px'}}>
               <h4>{index + 1}</h4>
